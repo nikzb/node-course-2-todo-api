@@ -42,7 +42,7 @@ app.get('/todos/:id', (req, res) => {
   // findById - look for matching document
   Todo.findById(id).then((todo) => {
     if (todo) {
-      res.send(todo);
+      res.send({todo});
     } else {
       res.status(404).send();
     }
