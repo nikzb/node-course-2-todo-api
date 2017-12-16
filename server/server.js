@@ -102,6 +102,35 @@ app.patch('/todos/:id', (req, res) => {
   });
 });
 
+// app.post('/users', (req, res) => {
+//   const body = _.pick(req.body, ['email', 'password']);
+//
+//   console.log(body);
+//   console.log(req.body);
+//   // const bo
+//   const user = new User(body);
+//
+//   user.save().then((userDoc) => {
+//     res.send(userDoc);
+//   }).catch((e) => {
+//     res.status(400).send(e);
+//   });
+// });
+
+app.post('/users', async (req, res) => {
+  const body = _.pick(req.body, ['email', 'password']);
+  const user = new User(body);
+
+  try {
+    // const user = await user.save();
+    await user.save();
+    const token = await user.generateAuthToken();
+    res.header('x-auth', token).send(user);
+  } catch(e) {
+    res.status(400).send(e);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Started on port ${port}`);
 });
