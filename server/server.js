@@ -118,7 +118,6 @@ app.patch('/todos/:id', (req, res) => {
 //   });
 // });
 
-// POST /users
 app.post('/users', async (req, res) => {
   const body = _.pick(req.body, ['email', 'password']);
   const user = new User(body);
@@ -133,7 +132,6 @@ app.post('/users', async (req, res) => {
   }
 });
 
-// POST /users/login
 app.post('/users/login', async (req, res) => {
   console.log('in post users/login');
   const body = _.pick(req.body, ['email', 'password']);
@@ -145,24 +143,6 @@ app.post('/users/login', async (req, res) => {
   } catch (e) {
     res.status(400).send();
   }
-
-  // try {
-  //   const user = await User.findOne({ email: body.email });
-  //   console.log(user);
-  //
-  //   const response = await bcrypt.compare(body.password, user.password); //, (err, res) => {
-  //     console.log('response: ' + response);
-  //
-  //     if (response) {
-  //       return res.status(200).send(body);
-  //     }
-  //
-  //     return res.status(400).send('Fail');
-  //
-  // }
-  // catch (e) {
-  //   res.status(400).send(e);
-  // }
 });
 
 
