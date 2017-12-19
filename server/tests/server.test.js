@@ -223,8 +223,8 @@ describe('POST /users', () => {
   });
 
   it('should not create user if email in use', (done) => {
-    const email = 'niko@bc.com';
-    const password = 'userOnePass';
+    const email = users[0].email;
+    const password = users[0].password;
     request(app)
       .post('/users')
       .send({email, password})
