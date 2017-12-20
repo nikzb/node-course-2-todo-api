@@ -145,6 +145,16 @@ app.post('/users/login', async (req, res) => {
   }
 });
 
+app.delete('/users/me/token', authenticate, async (req, res) => {
+
+  try {
+    await req.user.removeToken(req.token);
+    res.status(200).send();
+  } catch (e) {
+    res.status(400).send(e);
+  }
+
+});
 
 app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user);
